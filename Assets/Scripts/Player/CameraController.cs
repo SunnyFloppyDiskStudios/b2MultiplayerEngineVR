@@ -62,82 +62,10 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
-
-        if (inputType == EInput.DESKTOP)
+        
+        if (inputType == EInput.VIRTUAL)
         {
-            //mouse control block
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
-                yaw += Input.GetAxisRaw("Mouse X") * sensitivity;
-                pitch += Input.GetAxisRaw("Mouse Y") * sensitivity;
-
-                //wrap around rX
-                if (yaw < Mathf.PI * -2.0f)
-                {
-                    yaw += Mathf.PI * 2.0f;
-                }
-                if (yaw > Mathf.PI * 2.0f)
-                {
-                    yaw -= Mathf.PI * 2.0f;
-                }
-
-                pitch = Mathf.Clamp(pitch, -Mathf.PI * 0.5f + 0.001f, Mathf.PI * 0.5f - 0.001f);
-            }
-        }
-        else if (inputType == EInput.MOBILE)
-        {
-            MobileMenuManager mobileMenuManager = menuManager as MobileMenuManager;
-
-            //find touch in top half of screen
-            ManagedTouch cameraDragData = null;     
-
-            RectTransform referenceTransform = mobileMenuManager.jumpButton.GetComponent<RectTransform>();
-            float jumpButtonY = referenceTransform.position.y;
-            float jumpButtonYRatio = jumpButtonY / Screen.height;
-
-            int count = touchData.touchList.Count;
-
-            for (int i = 0; i < count; i++)
-            {
-                ManagedTouch item = touchData.touchList[i];
-
-                if (mobileMenuManager.currentOrientation == MobileMenuManager.EOrientation.VERTICAL)
-                {
-                    if (item.start.y >= Screen.height * jumpButtonYRatio)
-                    {
-                        cameraDragData = item;
-                        break;
-                    }
-                }
-                else if (mobileMenuManager.currentOrientation == MobileMenuManager.EOrientation.HORIZONTAL)
-                {
-                    if (item.start.x >= Screen.width * 0.5f)
-                    {
-                        cameraDragData = item;
-                        break;
-                    }
-                }
-            }
-
-            if (cameraDragData != null)
-            {
-                float dpi = Screen.dpi;
-
-                yaw += (cameraDragData.touch.deltaPosition.x * sensitivity) / dpi;
-                pitch += (cameraDragData.touch.deltaPosition.y * sensitivity) / dpi;
-            }
-
-            //wrap around rX
-            if (yaw < Mathf.PI * -2.0f)
-            {
-                yaw += Mathf.PI * 2.0f;
-            }
-            if (yaw > Mathf.PI * 2.0f)
-            {
-                yaw -= Mathf.PI * 2.0f;
-            }
-
-            pitch = Mathf.Clamp(pitch, -Mathf.PI * 0.5f + 0.001f, Mathf.PI * 0.5f - 0.001f);
+            //s add later
         }
 
         if (fuzz)

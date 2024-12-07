@@ -1268,7 +1268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ea30a67abdc274ea987c29a1ac19d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 0
+  inputType: 2
   menuManager: {fileID: 1716564804}
   defaultFocus: {fileID: 1678562355}
   focus: {fileID: 1678562355}
@@ -1276,8 +1276,8 @@ MonoBehaviour:
   pitch: 0
   range: 0.01
   sensitivity: 0.11
-  connect: 323
-  release: 27
+  connect: 330
+  release: 509
   blockingMask:
     serializedVersion: 2
     m_Bits: 55
@@ -1295,7 +1295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed0aeb44d064954e8a277c7efab3dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 0
+  inputType: 2
   isActive: 0
   client: {fileID: 2063480021}
   gamePanel: {fileID: 1619940348}
@@ -1687,6 +1687,7 @@ GameObject:
   - component: {fileID: 2063480027}
   - component: {fileID: 2063480026}
   - component: {fileID: 2063480028}
+  - component: {fileID: 2063480029}
   m_Layer: 0
   m_Name: ClientManager
   m_TagString: Untagged
@@ -1721,7 +1722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5509dcd5d057b24d9cd4c3b77c75366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformType: 1
+  platformType: 6
   proxyId: -1
   proxy: {fileID: 0}
   idleTime: 0
@@ -1809,7 +1810,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063480017}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92f7264aabd7a3747adb21d8d97201a3, type: 3}
   m_Name: 
@@ -1861,6 +1862,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentBytes: 0
   recievedBytes: 0
+--- !u!114 &2063480029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063480017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868c4f5344d2483494d996577b50ad82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraController: {fileID: 1716564802}
+  menuOverride: 0
+  fuzz: 0
 --- !u!114 &2077007837 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6308787588964821855, guid: 58d04c7169e1f5b49924bf712d7201ba, type: 3}
