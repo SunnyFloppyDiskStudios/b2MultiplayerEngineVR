@@ -56,11 +56,41 @@ public class VirtualInputManager : InputManager
     }
 
     private void PollPhysicalJoystick() {
+        Vector2 vector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         
+        if (vector.sqrMagnitude >= 1f)
+        {
+            vector.Normalize();
+        }
+		
+        buttonData.joystick = vector;
     }
+    
+    // public void JumpButtonPressed()
+    // {
+    //     buttonData.jump = true;
+    //     buttonData.jump = false;
+    // }
+    //
+    // public void FireButtonPressed()
+    // {
+    //     buttonData.fire = true;
+    //     buttonData.fire = false;
+    // }
 
-    private void PollPhysicalButtons() {
-        
+    public void PollPhysicalButtons() // likely broken
+    {
+        if (Input.GetKeyDown(KeyCode.JoystickButton0))
+        {
+            // JumpButtonPressed();
+            buttonData.jump = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.JoystickButton15))
+        {
+            // FireButtonPressed();
+            buttonData.fire = true;
+        }
     }
 
     public override void PerFrameUpdate()
