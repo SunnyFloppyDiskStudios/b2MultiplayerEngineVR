@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class CameraController : MonoBehaviour
 {
@@ -63,9 +64,10 @@ public class CameraController : MonoBehaviour
             }
         }
         
-        if (inputType == EInput.VIRTUAL)
-        {
-            //s add later
+        if (inputType == EInput.VIRTUAL) //s potentially change
+        { 
+            yaw = InputTracking.GetLocalRotation(XRNode.Head).x; 
+            pitch = InputTracking.GetLocalRotation(XRNode.Head).y;
         }
 
         if (fuzz)
