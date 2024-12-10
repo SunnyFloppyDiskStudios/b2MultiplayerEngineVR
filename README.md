@@ -4,7 +4,11 @@
 
 ### Controls:
 Camera: Headset (Body) Rotation
+
 World movement: Left Joystick
+
 Jump: A (Button 0)
+
 Fire: Right Trigger (Button 15)
+
 Unlink from server: Menu (Button 6)
