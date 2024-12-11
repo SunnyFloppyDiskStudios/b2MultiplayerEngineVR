@@ -1,4 +1,4 @@
-![Slice](https://github.com/user-attachments/assets/d962fcfa-a475-4eb3-84e2-a2e3f66305eb)
+![Slice](https://github.com/user-attachments/assets/a8e07cca-4553-4d31-9964-bf007c0004cf)
 
 ## [b2studios' Bubble Party multiplayer engine client](https://github.com/b2developer/MultiplayerEngine), modified to added support for Meta (Oculus) VR headsets and it's full native capabilities.
 
