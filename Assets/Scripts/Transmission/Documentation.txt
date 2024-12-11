@@ -37,3 +37,6 @@ simple entropy encoding packed uints
 delta compression
 
 frustum culling caches colliders, if they change, this needs to be updated
+
+
+thanks bro -SF
