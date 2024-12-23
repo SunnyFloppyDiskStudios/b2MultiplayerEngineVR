@@ -16,5 +16,9 @@ public class UnlinkClient : MonoBehaviour {
     public void Unlink() {
         
     }
+
+    public void Relink() {
+        
+    }
     
 }

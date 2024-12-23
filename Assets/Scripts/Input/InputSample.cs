@@ -172,8 +172,8 @@ public class InputSample
 
     public virtual void Initialise()
     {
-        jump = new Button(KeyCode.Space);
-        fire = new Button(KeyCode.Mouse0);
+        jump = new Button(KeyCode.JoystickButton0);
+        fire = new Button(KeyCode.JoystickButton15);
     }
 
     public virtual Vector2 GetMovementVector()

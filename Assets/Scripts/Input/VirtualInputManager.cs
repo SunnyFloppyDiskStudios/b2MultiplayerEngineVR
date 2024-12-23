@@ -1,53 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Security.Principal;
+using System.Security.Permissions;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
 
-public class ButtonData
-{
-    public bool jump = false;
-    public bool fire = false;
-    public Vector2 joystick = Vector2.zero;
-}
-
-public class ManagedTouch
-{
-    public int index = 0;
-    public int fingerId = 0;
-
-    public Touch touch;
-    public Vector2 start;
-}
-
-public class TouchData
-{
-    public List<ManagedTouch> touchList;
-
-    public TouchData()
-    {
-        touchList = new List<ManagedTouch>();
-    }
-}
-
+//wrapper class for input sample, essentially allows the client to assume control over their copy
 public class VirtualInputManager : InputManager
 {
     public VirtualInputSample sample;
 
-    public ButtonData buttonData;
+    public bool hasFocus = false;
 
     public override void Initialise()
     {
         sample = new VirtualInputSample();
         sample.Initialise();
 
-        buttonData = new ButtonData();
-
-        cameraController.inputType = EInput.VIRTUAL;
-        cameraController.menuManager.inputType = EInput.VIRTUAL;
-        
-        cameraController.menuManager.buttonData = buttonData;
+        cameraController.inputType = EInput.DESKTOP;
+        cameraController.menuManager.inputType = EInput.DESKTOP;
     }
 
     public override InputSample GetInputSample()
@@ -55,78 +22,29 @@ public class VirtualInputManager : InputManager
         return sample;
     }
 
-    private void PollPhysicalJoystick() {
-        Vector2 vector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        
-        if (vector.sqrMagnitude >= 1f)
-        {
-            vector.Normalize();
-        }
-		
-        buttonData.joystick = vector;
-    }
-    
-    // public void JumpButtonPressed()
-    // {
-    //     buttonData.jump = true;
-    //     buttonData.jump = false;
-    // }
-    //
-    // public void FireButtonPressed()
-    // {
-    //     buttonData.fire = true;
-    //     buttonData.fire = false;
-    // }
-
-    public void PollPhysicalButtons() // likely broken
-    {
-        if (Input.GetKeyDown(KeyCode.JoystickButton0))
-        {
-            // JumpButtonPressed();
-            buttonData.jump = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.JoystickButton15))
-        {
-            // FireButtonPressed();
-            buttonData.fire = true;
-        }
-    }
-
     public override void PerFrameUpdate()
     {
-        PollPhysicalJoystick(); //s mobile menu manager init
-
-        sample.joystickX.value = -buttonData.joystick.x;
-        sample.joystickY.value = buttonData.joystick.y;
-
-        sample.joystickX.Quantize();
-        sample.joystickY.Quantize();
-
-        PollPhysicalButtons(); //s mobile menu manager init
-
-        //sort button data
-        if (buttonData.jump)
-        {
-            sample.jump.state = EButtonState.ON_PRESS;
-            sample.jump.changeDetected = true;
-
-            buttonData.jump = false;
-        }
-
-        if (buttonData.fire)
-        {
-            sample.fire.state = EButtonState.ON_PRESS;
-            sample.fire.changeDetected = true;
-
-            buttonData.fire = false;
-        }
-
         //inputs must be sampled every frame
-        sample.jump.Poll(true, fuzz);
-        sample.fire.Poll(true, fuzz);
-
+        sample.left.Poll(menuOverride, fuzz);
+        sample.right.Poll(menuOverride, fuzz);
+        sample.forward.Poll(menuOverride, fuzz);
+        sample.backward.Poll(menuOverride, fuzz);
+        sample.jump.Poll(menuOverride, fuzz);
+        
         cameraController.Poll();
+
+        bool hasFocusCurrent = Cursor.lockState == CursorLockMode.Locked;
+
+        //require the fire button to be released before it can be triggered
+        if (hasFocus != hasFocusCurrent)
+        {
+            sample.fire.requireRelease = true;
+        }
+
+        hasFocus = hasFocusCurrent;
+
+        sample.fire.Poll(menuOverride, fuzz);
+
         sample.yaw = cameraController.yaw;
 
         sample.pitch = 0.0f;
@@ -139,6 +57,10 @@ public class VirtualInputManager : InputManager
 
     public override void Tick()
     {
+        sample.left.Reset();
+        sample.right.Reset();
+        sample.forward.Reset();
+        sample.backward.Reset();
         sample.jump.Reset();
         sample.fire.Reset();
 

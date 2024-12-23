@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
+
+// re-do when b2 uploads updated client
+
 public class CameraController : MonoBehaviour
 {
     public EInput inputType;
