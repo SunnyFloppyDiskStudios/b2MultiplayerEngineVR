@@ -4,6 +4,7 @@ public enum EInput
 {
     DESKTOP = 0,
     MOBILE = 1,
+    VIRTUAL = 2
 }
 
 public enum EButtonState

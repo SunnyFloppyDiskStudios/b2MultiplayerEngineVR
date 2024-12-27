@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class CameraController : MonoBehaviour
 {
@@ -160,6 +161,15 @@ public class CameraController : MonoBehaviour
             }
 
             pitch = Mathf.Clamp(pitch, -Mathf.PI * 0.5f + 0.001f, Mathf.PI * 0.5f - 0.001f);
+        }
+        else if (inputType == EInput.VIRTUAL)
+        {
+            Quaternion headsetRotation = InputTracking.GetLocalRotation(XRNode.Head);
+            
+            yaw = headsetRotation.eulerAngles.z;
+            pitch = headsetRotation.eulerAngles.y;
+			
+            transform.rotation = headsetRotation;
         }
 
         if (fuzz)

@@ -63864,11 +63864,11 @@ GameObject:
   - component: {fileID: 2063480023}
   - component: {fileID: 2063480022}
   - component: {fileID: 2063480024}
-  - component: {fileID: 2063480025}
   - component: {fileID: 2063480027}
   - component: {fileID: 2063480026}
   - component: {fileID: 2063480028}
   - component: {fileID: 2063480029}
+  - component: {fileID: 2063480030}
   m_Layer: 0
   m_Name: ClientManager
   m_TagString: Untagged
@@ -63903,7 +63903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5509dcd5d057b24d9cd4c3b77c75366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformType: 1
+  platformType: 6
   proxyId: -1
   proxy: {fileID: 0}
   proxyFrame: {x: 0, y: 0, z: 0, w: 1}
@@ -63914,7 +63914,7 @@ MonoBehaviour:
   updateManager: {fileID: 1666452853}
   objectRegistry: {fileID: 2063480023}
   entityManager: {fileID: 2063480022}
-  inputManager: {fileID: 2063480025}
+  inputManager: {fileID: 2063480030}
   clientSidePrediction: {fileID: 2063480026}
   statistics: {fileID: 2063480028}
   gameClient: {fileID: 2063480029}
@@ -64003,22 +64003,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 224f98f857b05ed458dfad8e43d4322e, type: 3}
   - {fileID: 8300000, guid: a4a6df5e6987c3347ac1923582853a34, type: 3}
   - {fileID: 8300000, guid: 08ea82e72dd82074186ed2811c0b7e7c, type: 3}
---- !u!114 &2063480025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063480017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92f7264aabd7a3747adb21d8d97201a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraController: {fileID: 1716564802}
-  menuOverride: 0
-  fuzz: 0
-  hasFocus: 0
 --- !u!114 &2063480026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64077,6 +64061,22 @@ MonoBehaviour:
   client: {fileID: 2063480021}
   finder: {fileID: 453232657}
   activeShips: []
+--- !u!114 &2063480030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063480017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20fbc5a5b2e74ad5a6aadf208d0d485b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraController: {fileID: 1716564802}
+  menuOverride: 0
+  fuzz: 0
+  hasFocus: 0
 --- !u!1 &2066919953
 GameObject:
   m_ObjectHideFlags: 0
