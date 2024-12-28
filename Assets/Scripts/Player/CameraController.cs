@@ -209,7 +209,7 @@ public class CameraController : MonoBehaviour
 
     public void TogglePerspective()
     {
-        isThirdPerson = !isThirdPerson;
+        isThirdPerson = false; // removed because will screw vr
 
         if (isRouted)
         {
