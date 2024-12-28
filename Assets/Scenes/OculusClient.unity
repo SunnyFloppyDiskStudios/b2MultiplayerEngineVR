@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1e1fc355d91f7447da518c5bb54478f9, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -52779,7 +52779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ea30a67abdc274ea987c29a1ac19d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 0
+  inputType: 2
   menuManager: {fileID: 1716564804}
   cameraElbow: {fileID: 1793348597}
   frame: {x: 0, y: 0, z: 0, w: 1}
@@ -52790,7 +52790,7 @@ MonoBehaviour:
   range: 0.01
   trueRange: 0.01
   sensitivity: 0.11
-  connect: 323
+  connect: 330
   release: 27
   blockingMask:
     serializedVersion: 2
@@ -52810,7 +52810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed0aeb44d064954e8a277c7efab3dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 0
+  inputType: 2
   isActive: 0
   client: {fileID: 2063480021}
   gamePanel: {fileID: 1619940348}
@@ -52838,7 +52838,7 @@ MonoBehaviour:
   informationText1: {fileID: 1051663405}
   informationText2: {fileID: 1032387487}
   isTyping: 0
-  username: 
+  username: sun
   usernameText: {fileID: 1934670948}
 --- !u!1 &1730737477
 GameObject:

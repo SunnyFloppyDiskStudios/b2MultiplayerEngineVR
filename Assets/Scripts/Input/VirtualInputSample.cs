@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.XR;
 
 public class VirtualInputSample : InputSample
 {
@@ -61,7 +62,7 @@ public class VirtualInputSample : InputSample
 
     public override Vector3 GetLookVector()
     {
-        return MathExtension.DirectionFromYawPitch(yaw, pitch);
+        return InputTracking.GetLocalRotation(XRNode.Head).eulerAngles;
     }
 
     //entropy encoding: 0 for no left / right, 1 for left or right followed by the identifier bit

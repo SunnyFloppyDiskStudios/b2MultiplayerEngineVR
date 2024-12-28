@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/OculusClient.unity
     guid: 11abd380cc18c98489092f59852a7863
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 1cbc1c6b9c140494cb9f2f33c1595ea0, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 3abe23886dcb8db46b879a5aa90acd52, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: a20f89add13521341a2eda13c0cc5d9c, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6b874a243ad444b30aa081bd0f276d9f, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 82d475b6088f14d6d8b4b7585c31787b, type: 2}
   m_UseUCBPForAssetBundles: 0
