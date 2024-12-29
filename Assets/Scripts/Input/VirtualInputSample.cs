@@ -27,29 +27,31 @@ public class VirtualInputSample : InputSample
     {
         Vector2 vector = Vector2.zero;
 
-        if (Input.GetAxis("Horizontal") < 0.25f)
-        {
-            left.state = EButtonState.PRESSED;
-            vector.x += 1.0f;
-        }
-
-        if (Input.GetAxis("Horizontal") > 0.25f)
-        {
-            right.state = EButtonState.PRESSED;
-            vector.x += -1.0f;
-        }
-
-        if (Input.GetAxis("Vertical") > 0.25f)
-        {
-            forward.state = EButtonState.PRESSED;
-            vector.y += 1.0f;
-        }
-
-        if (Input.GetAxis("Vertical") < 0.25f)
-        {
-            backward.state = EButtonState.PRESSED;
-            vector.y += -1.0f;
-        }
+        // problem code! - sf
+        
+        // if (Input.GetAxis("Horizontal") < 0.25f)
+        // {
+        //     left.state = EButtonState.PRESSED;
+        //     vector.x += 1.0f;
+        // }
+        //
+        // if (Input.GetAxis("Horizontal") > 0.25f)
+        // {
+        //     right.state = EButtonState.PRESSED;
+        //     vector.x += -1.0f;
+        // }
+        //
+        // if (Input.GetAxis("Vertical") > 0.25f)
+        // {
+        //     forward.state = EButtonState.PRESSED;
+        //     vector.y += 1.0f;
+        // }
+        //
+        // if (Input.GetAxis("Vertical") < 0.25f)
+        // {
+        //     backward.state = EButtonState.PRESSED;
+        //     vector.y += -1.0f;
+        // }
 
         //normalise vector that's diagonal
         if (vector.x != 0.0f && vector.y != 0.0f)

@@ -165,12 +165,12 @@ public class CameraController : MonoBehaviour
         else if (inputType == EInput.VIRTUAL)
         {
             Quaternion headsetRotation = InputTracking.GetLocalRotation(XRNode.Head);
-            headsetRotation.x = 0f;
-            headsetRotation.w = 0f;
+            headsetRotation.x = 0f; // problem?
+            headsetRotation.w = 0f; // problem?
             
             yaw = headsetRotation.eulerAngles.z;
             pitch = headsetRotation.eulerAngles.y;
-			
+			         
             transform.rotation = headsetRotation;
         }
 
