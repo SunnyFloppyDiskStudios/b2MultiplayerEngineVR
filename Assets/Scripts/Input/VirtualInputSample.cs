@@ -27,8 +27,17 @@ public class VirtualInputSample : InputSample
     {
         Vector2 vector = Vector2.zero;
 
-        // problem code! - sf
+        if (Input.GetAxis("Horizontal") != 0f) {
+            vector.x += Input.GetAxis("Horizontal");
+        }
+
+        if (Input.GetAxis("Vertical") != 0f)
+        {
+            vector.y += Input.GetAxis("Vertical");
+        }
         
+        
+        // problem code! - sf
         // if (Input.GetAxis("Horizontal") < 0.25f)
         // {
         //     left.state = EButtonState.PRESSED;
