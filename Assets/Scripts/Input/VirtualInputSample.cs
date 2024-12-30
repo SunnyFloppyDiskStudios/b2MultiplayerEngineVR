@@ -29,11 +29,26 @@ public class VirtualInputSample : InputSample
 
         if (Input.GetAxis("Horizontal") != 0f) {
             vector.x += Input.GetAxis("Horizontal");
+            if (vector.x > 0f)
+            {
+                left.state = EButtonState.PRESSED;
+            } else if (vector.x < 0f)
+            {
+                right.state = EButtonState.PRESSED;
+            }
         }
 
         if (Input.GetAxis("Vertical") != 0f)
         {
             vector.y += Input.GetAxis("Vertical");
+
+            if (vector.y > 0f)
+            {
+                forward.state = EButtonState.PRESSED;
+            } else if (vector.y < 0f)
+            {
+                backward.state = EButtonState.PRESSED;
+            }
         }
         
         
