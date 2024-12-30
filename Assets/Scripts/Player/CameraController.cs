@@ -85,93 +85,19 @@ public class CameraController : MonoBehaviour
         {
             range = trueRange;
         }
-
-        if (inputType == EInput.DESKTOP)
-        {
-            //mouse control block
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
-                yaw += Input.GetAxisRaw("Mouse X") * sensitivity;
-                pitch += Input.GetAxisRaw("Mouse Y") * sensitivity;
-
-                //wrap around rX
-                if (yaw < Mathf.PI * -2.0f)
-                {
-                    yaw += Mathf.PI * 2.0f;
-                }
-                if (yaw > Mathf.PI * 2.0f)
-                {
-                    yaw -= Mathf.PI * 2.0f;
-                }
-
-                pitch = Mathf.Clamp(pitch, -Mathf.PI * 0.5f + 0.001f, Mathf.PI * 0.5f - 0.001f);
-            }
-        }
-        else if (inputType == EInput.MOBILE)
-        {
-            MobileMenuManager mobileMenuManager = menuManager as MobileMenuManager;
-
-            //find touch in top half of screen
-            ManagedTouch cameraDragData = null;     
-
-            RectTransform referenceTransform = mobileMenuManager.jumpButton.GetComponent<RectTransform>();
-            float jumpButtonY = referenceTransform.position.y;
-            float jumpButtonYRatio = jumpButtonY / Screen.height;
-
-            int count = touchData.touchList.Count;
-
-            for (int i = 0; i < count; i++)
-            {
-                ManagedTouch item = touchData.touchList[i];
-
-                if (mobileMenuManager.currentOrientation == MobileMenuManager.EOrientation.VERTICAL)
-                {
-                    if (item.start.y >= Screen.height * jumpButtonYRatio)
-                    {
-                        cameraDragData = item;
-                        break;
-                    }
-                }
-                else if (mobileMenuManager.currentOrientation == MobileMenuManager.EOrientation.HORIZONTAL)
-                {
-                    if (item.start.x >= Screen.width * 0.5f)
-                    {
-                        cameraDragData = item;
-                        break;
-                    }
-                }
-            }
-
-            if (cameraDragData != null)
-            {
-                float dpi = Screen.dpi;
-
-                yaw += (cameraDragData.touch.deltaPosition.x * sensitivity) / dpi;
-                pitch += (cameraDragData.touch.deltaPosition.y * sensitivity) / dpi;
-            }
-
-            //wrap around rX
-            if (yaw < Mathf.PI * -2.0f)
-            {
-                yaw += Mathf.PI * 2.0f;
-            }
-            if (yaw > Mathf.PI * 2.0f)
-            {
-                yaw -= Mathf.PI * 2.0f;
-            }
-
-            pitch = Mathf.Clamp(pitch, -Mathf.PI * 0.5f + 0.001f, Mathf.PI * 0.5f - 0.001f);
-        }
-        else if (inputType == EInput.VIRTUAL)
+        
+        // cleared out mobile and desktop due to redundancy (and maybe issue)
+        
+        // Rotating Camera
+         if (inputType == EInput.VIRTUAL)
         {
             Quaternion headsetRotation = InputTracking.GetLocalRotation(XRNode.Head);
-            headsetRotation.x = 0f; // problem?
-            headsetRotation.w = 0f; // problem?
-            
+            headsetRotation.x = 0f;
+
             yaw = headsetRotation.eulerAngles.z;
             pitch = headsetRotation.eulerAngles.y;
 			         
-            transform.rotation = headsetRotation;
+            transform.localRotation = headsetRotation; // in theory should NOT pull from any source other than the Quaternion...
         }
 
         if (fuzz)
@@ -185,16 +111,16 @@ public class CameraController : MonoBehaviour
             focus = defaultFocus;
         }
 
-        cameraElbow.rotation = frame;
-
+        // cameraElbow.rotation = frame;
+        
         Vector3 lf = MathExtension.DirectionFromYawPitch(yaw, pitch);
         Vector3 f = cameraElbow.TransformDirection(lf);
-
+        
         RaycastHit collInfo;
-
+        
         Vector3 target = focus.position + f * range;
-
-        //readjust the camera position if there is a collider in the way
+        
+        //readjust the camera position if there is a collider in the way -- Third person but maybe issue
         if (Physics.SphereCast(focus.position, collisionRadius, (target - focus.position).normalized, out collInfo, range, blockingMask.value))
         {
             cameraElbow.position = collInfo.point + collInfo.normal * collisionRadius;
@@ -203,57 +129,13 @@ public class CameraController : MonoBehaviour
         {
             cameraElbow.position = focus.position + f * range;
         }
-
-        transform.localRotation = Quaternion.LookRotation(-lf);
+        
+        // transform.localRotation = Quaternion.LookRotation(-lf);
     }
 
-    public void TogglePerspective()
-    {
-        isThirdPerson = false; // removed because will screw vr
+    public void TogglePerspective() {}
 
-        if (isRouted)
-        {
-            isThirdPerson = true;
-        }
-
-        if (menuManager.client.proxy != null)
-        {
-            MeshRenderer[] meshRenderers = menuManager.client.proxy.animator.GetComponentsInChildren<MeshRenderer>(true);
-
-            foreach (MeshRenderer meshRenderer in meshRenderers)
-            {
-                if (isThirdPerson)
-                {
-                    meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
-                }
-                else
-                {
-                    meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
-                }
-            }
-        }
-
-        if (isThirdPerson)
-        {
-            if (menuManager.perspectiveButtonText != null)
-            {
-                menuManager.perspectiveButtonText.text = "First-Person";
-            }
-
-            trueRange = 2.0f;
-        }
-        else
-        {
-            if (menuManager.perspectiveButtonText != null)
-            {
-                menuManager.perspectiveButtonText.text = "Third-Person";
-            }
-
-            trueRange = 0.01f;
-        }
-    }
-
-    public void CameraCorrection(Quaternion oldFrame, Quaternion newFrame)
+    public void CameraCorrection(Quaternion oldFrame, Quaternion newFrame) // for ships
     {
         Vector3 of = oldFrame * Vector3.forward;
         Vector3 nf = newFrame * Vector3.forward;
@@ -268,7 +150,7 @@ public class CameraController : MonoBehaviour
 
     public void SetCamera(float yaw, float pitch)
     {
-        this.yaw = yaw;
-        this.pitch = pitch;
+        // this.yaw = yaw;
+        // this.pitch = pitch;
     }
 }

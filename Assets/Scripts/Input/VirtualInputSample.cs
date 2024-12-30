@@ -29,11 +29,9 @@ public class VirtualInputSample : InputSample
 
         if (Input.GetAxis("Horizontal") != 0f) {
             vector.x += Input.GetAxis("Horizontal");
-            if (vector.x > 0f)
-            {
+            if (vector.x > 0f) {
                 left.state = EButtonState.PRESSED;
-            } else if (vector.x < 0f)
-            {
+            } else if (vector.x < 0f) {
                 right.state = EButtonState.PRESSED;
             }
         }
@@ -42,40 +40,12 @@ public class VirtualInputSample : InputSample
         {
             vector.y += Input.GetAxis("Vertical");
 
-            if (vector.y > 0f)
-            {
+            if (vector.y > 0f) {
                 forward.state = EButtonState.PRESSED;
-            } else if (vector.y < 0f)
-            {
+            } else if (vector.y < 0f) {
                 backward.state = EButtonState.PRESSED;
             }
         }
-        
-        
-        // problem code! - sf
-        // if (Input.GetAxis("Horizontal") < 0.25f)
-        // {
-        //     left.state = EButtonState.PRESSED;
-        //     vector.x += 1.0f;
-        // }
-        //
-        // if (Input.GetAxis("Horizontal") > 0.25f)
-        // {
-        //     right.state = EButtonState.PRESSED;
-        //     vector.x += -1.0f;
-        // }
-        //
-        // if (Input.GetAxis("Vertical") > 0.25f)
-        // {
-        //     forward.state = EButtonState.PRESSED;
-        //     vector.y += 1.0f;
-        // }
-        //
-        // if (Input.GetAxis("Vertical") < 0.25f)
-        // {
-        //     backward.state = EButtonState.PRESSED;
-        //     vector.y += -1.0f;
-        // }
 
         //normalise vector that's diagonal
         if (vector.x != 0.0f && vector.y != 0.0f)
@@ -86,9 +56,17 @@ public class VirtualInputSample : InputSample
         return vector;
     }
 
-    public override Vector3 GetLookVector()
-    {
-        return InputTracking.GetLocalRotation(XRNode.Head).eulerAngles;
+    public override Vector3 GetLookVector() {
+        // Quaternion headsetRotation = InputTracking.GetLocalRotation(XRNode.Head);
+        // headsetRotation.x = 0f; // problem? -- camera controller
+        // // headsetRotation.w = 0f; // problem? -- camera controller
+        //     
+        // // yaw = headsetRotation.eulerAngles.z;
+        // // pitch = headsetRotation.eulerAngles.y;
+			     //     
+        // return headsetRotation.eulerAngles;
+        
+        return Camera.main.transform.forward;
     }
 
     //entropy encoding: 0 for no left / right, 1 for left or right followed by the identifier bit
